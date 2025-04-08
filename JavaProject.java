@@ -3,3 +3,4 @@ public class JavaProject{
         System.out.println("text");
     }
 }
+// C:Program Files\Java\jdk-24\
