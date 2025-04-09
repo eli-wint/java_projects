@@ -24,7 +24,7 @@ public class AccountPanel {
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Account Info");
-        frame.setSize(500,100);
+        frame.setSize(500,125);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel label = new JLabel("Enter Username: ");
@@ -90,7 +90,7 @@ public class AccountPanel {
             if (e.getSource() == enterButton) {
                 System.out.println(textInput.getText());
                 
-                if (textInput.getText().isEmpty() || accountNames.contains(textInput.getText())) {
+                if (textInput.getText().isEmpty() || (accountNames.contains(textInput.getText())) && (nameHasBeenRead == false)) {
                     frame.getContentPane().add(BorderLayout.SOUTH, warningLabel);
                     frame.revalidate();
                 } else if ((nameHasBeenRead == false) && !(accountNames.contains(textInput.getText()))){
