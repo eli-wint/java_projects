@@ -1,4 +1,5 @@
-
+// Make saveable passwords, link passwords to account names and make account tabs.
+import static AccountCreator.makeAccountID;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,7 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class AccountPanel {
+public class AccountCreatorPanel {
 
     public static String accountName;
     public static String accountPassword;
@@ -120,6 +121,11 @@ public class AccountPanel {
                     frame.revalidate();
                     frame.repaint(0);
                 } else if ((nameHasBeenRead == true) && !(textInput.getText().isEmpty())) {
+                    // ------------------------------------------------------------------------------------------------------------------------------------------------
+                    String accountID = "acc" + id;
+                    int id = makeAccountID(); // Generate a new ID based on existing entries
+                    AccountCreator newAccount = new AccountCreator(accountName, accountPassword);
+                    accountMap.put(accountID, newAccount);
                     accountPassword = textInput.getText();
                     textInput.setText("");
                     label.setText("<html>" + "Account Created!" + "<br>" + "Username: " + accountName + "<br>" + "Password: " + accountPassword);
