@@ -1,5 +1,4 @@
 // Make saveable passwords, link passwords to account names and make account tabs.
-import static AccountCreator.makeAccountID;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -9,7 +8,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,8 +29,9 @@ public class AccountCreatorPanel {
     public static JTextField textInput = new JTextField(10);
     public static JPanel panel = new JPanel(new GridLayout(0, 3));
     public static Random random = new Random();
-    public static boolean startupNotComplete = true;
-    public static boolean accountCreation = false;
+    private static Map<String, AccountCreator> accountMap = new HashMap<>();
+    private static boolean startupNotComplete = true;
+    private static boolean accountCreation = false;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Account Info");
@@ -71,9 +73,7 @@ public class AccountCreatorPanel {
 
             // Method to update the label with the current text in the text field
             private void updateLabel() {
-                System.out.println(accountNames.toString());
-                System.out.println(textInput.getText());
-                if ((accountNames.contains(textInput.getText().trim())) || accountNames.contains(textInput.getText().trim().split(",\\s*"))) {
+                if ((accountNames.contains(textInput.getText().trim())) || accountNames.contains(textInput.getText().trim().split(",\s*"))) {
                     int randomNum = random.nextInt(10) + 1;
                     suggestionLabel.setText("<html>'" + textInput.getText() + "'" + " is taken. <br>Try: " + textInput.getText() + randomNum);
                 } else if (!(textInput.getText().isEmpty())) {
@@ -103,14 +103,11 @@ public class AccountCreatorPanel {
 
         enterButton.addActionListener((ActionEvent e) -> {
             if (e.getSource() == enterButton) {
-                System.out.println(textInput.getText());
-
                 if (textInput.getText().isEmpty() || (accountNames.contains(textInput.getText())) && (nameHasBeenRead == false)) {
                     frame.getContentPane().add(BorderLayout.SOUTH, warningLabel);
                     frame.revalidate();
-                } else if ((nameHasBeenRead == false) && !(accountNames.contains(textInput.getText()))) {
-                    accountNames.add(textInput.getText());
-                    FileIO(accountNames.toString().replace("[", "").replace("]", ""));
+                } else if ((nameHasBeenRead == false) && !(accountNames.contains(textInput.getText() + " : " + accountPassword))) {
+                    accountName = textInput.getText();
                     panel.remove(suggestionLabel);
                     panel.remove(warningLabel);
                     nameHasBeenRead = true;
@@ -121,12 +118,17 @@ public class AccountCreatorPanel {
                     frame.revalidate();
                     frame.repaint(0);
                 } else if ((nameHasBeenRead == true) && !(textInput.getText().isEmpty())) {
+                    accountPassword = textInput.getText();
+                    accountNames.add(accountName + " : " + accountPassword);
+                    FileIO(accountNames.toString().replace("[", "").replace("]", ""));
                     // ------------------------------------------------------------------------------------------------------------------------------------------------
+                    int id = AccountCreator.makeAccountID(); // Generate a new ID based on existing entries
                     String accountID = "acc" + id;
-                    int id = makeAccountID(); // Generate a new ID based on existing entries
                     AccountCreator newAccount = new AccountCreator(accountName, accountPassword);
                     accountMap.put(accountID, newAccount);
+                    System.out.println(accountMap);
                     accountPassword = textInput.getText();
+                    System.out.println(accountID + " : " + accountName + " : " + accountPassword);
                     textInput.setText("");
                     label.setText("<html>" + "Account Created!" + "<br>" + "Username: " + accountName + "<br>" + "Password: " + accountPassword);
                     createAccountButton.setText("Create New Account");

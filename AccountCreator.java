@@ -1,11 +1,8 @@
-import java.util.HashMap;
-import java.util.Map;
-
+// Useless until I find a use... (potential for making saveable accounts?)
 public class AccountCreator {
     private static String username;
     private static String password;
     private static int accountID;
-    private static Map<String, AccountCreator> accountMap = new HashMap<>();
 
     public AccountCreator(String user, String pword) {
         username = user;
