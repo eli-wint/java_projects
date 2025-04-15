@@ -1,4 +1,5 @@
 // Make saveable passwords, link passwords to account names and make account tabs.
+
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -7,11 +8,13 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import javax.sound.sampled.Line;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,8 +33,11 @@ public class AccountCreatorPanel {
     public static JPanel panel = new JPanel(new GridLayout(0, 3));
     public static Random random = new Random();
     private static Map<String, AccountCreator> accountMap = new HashMap<>();
-    private static boolean startupNotComplete = true;
-    private static boolean accountCreation = false;
+    public static boolean startupNotComplete = true;
+    public static boolean accountCreation = false;
+    public static String entryInput = textInput.getText();
+    public static List<String> tempUsedNames = new ArrayList<>();
+    public static boolean isLoggingIn = false;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Account Info");
@@ -43,9 +49,11 @@ public class AccountCreatorPanel {
         JLabel suggestionLabel = new JLabel("Enter a username.");
         JButton enterButton = new JButton("Continue");
         JButton createAccountButton = new JButton("Create Account");
+        JButton loginButton = new JButton("Login");
         textInput.setSize(100, 10);
 
         panel.add(createAccountButton);
+        panel.add(loginButton);
 
         //panel.add(label);
         //panel.add(textInput);
@@ -53,27 +61,39 @@ public class AccountCreatorPanel {
         frame.getContentPane().add(BorderLayout.NORTH, panel);
         frame.setVisible(true);
 
-        FileIO("Nothing");
+        FileIO.FileProcessor("Nothing", "AccountUsernames.txt");
 
         textInput.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                updateLabel();
+                if (isLoggingIn == true) {
+                    updateLogin();
+                } else {
+                    updateLabel();
+                }
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                updateLabel();
+                if (isLoggingIn == true) {
+                    updateLogin();
+                } else {
+                    updateLabel();
+                }
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                updateLabel();
+                if (isLoggingIn == true) {
+                    updateLogin();
+                } else {
+                    updateLabel();
+                }
             }
 
             // Method to update the label with the current text in the text field
             private void updateLabel() {
-                if ((accountNames.contains(textInput.getText().trim())) || accountNames.contains(textInput.getText().trim().split(",\s*"))) {
+                if ((accountNames.contains(textInput.getText().trim())) || accountNames.contains(textInput.getText().trim().toLowerCase().replace("[", "")) || tempUsedNames.contains(textInput.getText())) {
                     int randomNum = random.nextInt(10) + 1;
                     suggestionLabel.setText("<html>'" + textInput.getText() + "'" + " is taken. <br>Try: " + textInput.getText() + randomNum);
                 } else if (!(textInput.getText().isEmpty())) {
@@ -81,6 +101,29 @@ public class AccountCreatorPanel {
                 } else if (textInput.getText().isEmpty()) {
                     suggestionLabel.setText("Enter a username.");
                 }
+            }
+
+            private void updateLogin() {
+                FileIO.ReadFile("AccountUsernames.txt");
+                List<String> validUsernames = FileIO.validUsernames;
+                if (validUsernames.contains(textInput.getText())) {
+                    suggestionLabel.setText("Valid Username");
+                } else {
+                    suggestionLabel.setText("Invalid Username");
+                }
+            }
+        });
+
+        loginButton.addActionListener((ActionEvent b) -> {
+            if (b.getSource() == loginButton) {
+                isLoggingIn = true;
+                panel.remove(createAccountButton);
+                label.setText("Username");
+                panel.add(textInput);
+                panel.add(enterButton);
+                frame.revalidate();
+                frame.repaint();
+                FileIO.ReadFile("AccountUsernames.txt");
             }
         });
 
@@ -91,6 +134,7 @@ public class AccountCreatorPanel {
                 label.setText("Enter Username: ");
                 textInput.setText("");
                 panel.remove(label);
+                panel.remove(loginButton);
                 panel.remove(createAccountButton);
                 panel.add(label);
                 panel.add(textInput);
@@ -103,32 +147,32 @@ public class AccountCreatorPanel {
 
         enterButton.addActionListener((ActionEvent e) -> {
             if (e.getSource() == enterButton) {
-                if (textInput.getText().isEmpty() || (accountNames.contains(textInput.getText())) && (nameHasBeenRead == false)) {
+                if (textInput.getText().isEmpty() || (accountNames.contains(textInput.getText())) && (nameHasBeenRead == false) || tempUsedNames.contains(textInput.getText())) {
                     frame.getContentPane().add(BorderLayout.SOUTH, warningLabel);
                     frame.revalidate();
-                } else if ((nameHasBeenRead == false) && !(accountNames.contains(textInput.getText() + " : " + accountPassword))) {
+                } else if ((nameHasBeenRead == false) && !(accountNames.contains(textInput.getText().trim().toLowerCase().replace("[", "")))) {
                     accountName = textInput.getText();
                     panel.remove(suggestionLabel);
                     panel.remove(warningLabel);
                     nameHasBeenRead = true;
-                    accountName = textInput.getText();
                     label.setText("Enter Password: ");
                     textInput.setText("");
                     frame.getContentPane().remove(warningLabel);
                     frame.revalidate();
                     frame.repaint(0);
                 } else if ((nameHasBeenRead == true) && !(textInput.getText().isEmpty())) {
+                    FileIO.accountCreation = true;
                     accountPassword = textInput.getText();
-                    accountNames.add(accountName + " : " + accountPassword);
-                    FileIO(accountNames.toString().replace("[", "").replace("]", ""));
+                    String writeToFile = accountName + " : " + accountPassword;
+                    accountNames.add((accountName + " : " + accountPassword));
+                    tempUsedNames.add(accountName);
+                    FileIO.FileProcessor(writeToFile, "AccountUsernames.txt");
+                    System.out.println(accountNames.toString().toLowerCase());
                     // ------------------------------------------------------------------------------------------------------------------------------------------------
                     int id = AccountCreator.makeAccountID(); // Generate a new ID based on existing entries
                     String accountID = "acc" + id;
                     AccountCreator newAccount = new AccountCreator(accountName, accountPassword);
                     accountMap.put(accountID, newAccount);
-                    System.out.println(accountMap);
-                    accountPassword = textInput.getText();
-                    System.out.println(accountID + " : " + accountName + " : " + accountPassword);
                     textInput.setText("");
                     label.setText("<html>" + "Account Created!" + "<br>" + "Username: " + accountName + "<br>" + "Password: " + accountPassword);
                     createAccountButton.setText("Create New Account");
@@ -138,36 +182,18 @@ public class AccountCreatorPanel {
                     panel.add(createAccountButton);
                     frame.revalidate();
                     frame.repaint();
+                    FileIO.accountCreation = false;
+                } else if (isLoggingIn == true) {
+                    List<String> validUsernames = FileIO.validUsernames;
+                    FileIO.ReadFile("AccountUsernames");
+                    if (validUsernames.contains(textInput)) {
+                        System.out.println("Good username");
+                        textInput.setText("");
+                        label.setText("Enter Password");
+                        frame.remove(warningLabel);
+                    }
                 }
             }
         });
-    }
-
-    @SuppressWarnings({"ConvertToTryWithResources", "CallToPrintStackTrace"})
-    private static void FileIO(String input) {
-        if (accountCreation == true) {
-            try {
-                new FileWriter("AccountUsernames.txt", false).close();
-                BufferedWriter writer = new BufferedWriter(new FileWriter("AccountUsernames.txt", true)); // Append mode
-                writer.write(input.replace(", ", "\n").replace("[", "").replace("]", ""));
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        
-        if (startupNotComplete == true) {
-            startupNotComplete = false;
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader("AccountUsernames.txt"));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    accountNames.add(line.replace(", ", "\n").replace("[", "").replace("]", ""));
-                }
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 }

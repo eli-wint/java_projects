@@ -1,1 +1,2 @@
-Steve : chicken_jockey
+jack : password
+jackson : pwrod
