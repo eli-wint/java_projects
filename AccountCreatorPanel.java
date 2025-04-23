@@ -38,6 +38,8 @@ public class AccountCreatorPanel {
     public static String entryInput = textInput.getText();
     public static List<String> tempUsedNames = new ArrayList<>();
     public static boolean isLoggingIn = false;
+    public static boolean isCheckingPassword = false;
+    public static String passedUsername;
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Account Info");
@@ -64,36 +66,33 @@ public class AccountCreatorPanel {
         FileIO.FileProcessor("Nothing", "AccountUsernames.txt");
 
         textInput.getDocument().addDocumentListener(new DocumentListener() {
+            private void handleDocumentUpdate() {
+                String inputText = textInput.getText();
+                if (isLoggingIn) {
+                    updateLogin();
+                } else {
+                    updateLabel();
+                }
+            }
+        
             @Override
             public void insertUpdate(DocumentEvent e) {
-                if (isLoggingIn == true) {
-                    updateLogin();
-                } else {
-                    updateLabel();
-                }
+                handleDocumentUpdate();
             }
-
+        
             @Override
             public void removeUpdate(DocumentEvent e) {
-                if (isLoggingIn == true) {
-                    updateLogin();
-                } else {
-                    updateLabel();
-                }
+                handleDocumentUpdate();
             }
-
+        
             @Override
             public void changedUpdate(DocumentEvent e) {
-                if (isLoggingIn == true) {
-                    updateLogin();
-                } else {
-                    updateLabel();
-                }
+                handleDocumentUpdate();
             }
 
             // Method to update the label with the current text in the text field
             private void updateLabel() {
-                if ((accountNames.contains(textInput.getText().trim())) || accountNames.contains(textInput.getText().trim().toLowerCase().replace("[", "")) || tempUsedNames.contains(textInput.getText())) {
+                if ((accountNames.contains(textInput.getText().trim().toLowerCase())) || accountNames.contains(textInput.getText().trim().toLowerCase().replace("[", "")) || tempUsedNames.contains(textInput.getText())) {
                     int randomNum = random.nextInt(10) + 1;
                     suggestionLabel.setText("<html>'" + textInput.getText() + "'" + " is taken. <br>Try: " + textInput.getText() + randomNum);
                 } else if (!(textInput.getText().isEmpty())) {
@@ -104,9 +103,9 @@ public class AccountCreatorPanel {
             }
 
             private void updateLogin() {
-                FileIO.ReadFile("AccountUsernames.txt");
+                FileIO.ReadFile("AccountUsernames.txt", true);
                 List<String> validUsernames = FileIO.validUsernames;
-                if (validUsernames.contains(textInput.getText())) {
+                if (validUsernames.contains(textInput.getText().toLowerCase())) {
                     suggestionLabel.setText("Valid Username");
                 } else {
                     suggestionLabel.setText("Invalid Username");
@@ -117,13 +116,15 @@ public class AccountCreatorPanel {
         loginButton.addActionListener((ActionEvent b) -> {
             if (b.getSource() == loginButton) {
                 isLoggingIn = true;
+                FileIO.ReadFile("AccountUsernames.txt", true);
+                panel.remove(loginButton);
                 panel.remove(createAccountButton);
                 label.setText("Username");
+                panel.add(suggestionLabel);
                 panel.add(textInput);
                 panel.add(enterButton);
                 frame.revalidate();
                 frame.repaint();
-                FileIO.ReadFile("AccountUsernames.txt");
             }
         });
 
@@ -147,10 +148,10 @@ public class AccountCreatorPanel {
 
         enterButton.addActionListener((ActionEvent e) -> {
             if (e.getSource() == enterButton) {
-                if (textInput.getText().isEmpty() || (accountNames.contains(textInput.getText())) && (nameHasBeenRead == false) || tempUsedNames.contains(textInput.getText())) {
+                if ((textInput.getText().isEmpty() || (accountNames.contains(textInput.getText())) && (nameHasBeenRead == false) || tempUsedNames.contains(textInput.getText())) && !(isLoggingIn)) {
                     frame.getContentPane().add(BorderLayout.SOUTH, warningLabel);
                     frame.revalidate();
-                } else if ((nameHasBeenRead == false) && !(accountNames.contains(textInput.getText().trim().toLowerCase().replace("[", "")))) {
+                } else if (!(isLoggingIn) && (nameHasBeenRead == false) && !(accountNames.contains(textInput.getText().trim().toLowerCase().replace("[", "")))) {
                     accountName = textInput.getText();
                     panel.remove(suggestionLabel);
                     panel.remove(warningLabel);
@@ -160,14 +161,13 @@ public class AccountCreatorPanel {
                     frame.getContentPane().remove(warningLabel);
                     frame.revalidate();
                     frame.repaint(0);
-                } else if ((nameHasBeenRead == true) && !(textInput.getText().isEmpty())) {
+                } else if (!(isLoggingIn) && (nameHasBeenRead == true) && !(textInput.getText().isEmpty())) {
                     FileIO.accountCreation = true;
                     accountPassword = textInput.getText();
                     String writeToFile = accountName + " : " + accountPassword;
                     accountNames.add((accountName + " : " + accountPassword));
                     tempUsedNames.add(accountName);
                     FileIO.FileProcessor(writeToFile, "AccountUsernames.txt");
-                    System.out.println(accountNames.toString().toLowerCase());
                     // ------------------------------------------------------------------------------------------------------------------------------------------------
                     int id = AccountCreator.makeAccountID(); // Generate a new ID based on existing entries
                     String accountID = "acc" + id;
@@ -185,12 +185,27 @@ public class AccountCreatorPanel {
                     FileIO.accountCreation = false;
                 } else if (isLoggingIn == true) {
                     List<String> validUsernames = FileIO.validUsernames;
-                    FileIO.ReadFile("AccountUsernames");
-                    if (validUsernames.contains(textInput)) {
+                    FileIO.ReadFile("AccountUsernames.txt", true);
+                    if (validUsernames.contains(textInput.getText().toLowerCase())) {
+                        // if it is the username + " : " + the password
+                        isCheckingPassword = true;
+                        passedUsername = textInput.getText();
                         System.out.println("Good username");
+                        panel.remove(suggestionLabel);
+                        panel.add(BorderLayout.WEST,label);
                         textInput.setText("");
                         label.setText("Enter Password");
                         frame.remove(warningLabel);
+                    }
+                        if (isCheckingPassword) {
+                            System.out.println("Checking Password");
+                            System.err.println(passedUsername + " : " + textInput.getText());
+                            System.out.println(FileIO.ReadFile("AccountUsernames.txt", false));
+                            if (FileIO.ReadFile("AccountUsernames.txt", false).contains(passedUsername.toLowerCase() + " : " + textInput.getText().toLowerCase())){
+                                textInput.setText("");
+                                System.out.println("Password is correct!");
+                            }
+                        
                     }
                 }
             }

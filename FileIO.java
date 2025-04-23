@@ -1,12 +1,15 @@
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FileIO {
+
     public static boolean startupNotComplete = true;
     public static boolean accountCreation = AccountCreatorPanel.accountCreation;
     public static List<String> accountNames = AccountCreatorPanel.accountNames;
@@ -24,7 +27,7 @@ public class FileIO {
                 e.printStackTrace();
             }
         }
-        
+
         if (startupNotComplete == true) {
             startupNotComplete = false;
             try {
@@ -43,20 +46,39 @@ public class FileIO {
             }
         }
     }
-    static List<String> ReadFile(String fileName) {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(":");
-                if (parts.length > 0) {
-                    String username = parts[0].trim().toLowerCase();
-                    validUsernames.add(username);
+
+    static List<String> ReadFile(String fileName, boolean isReadingUsernames) {
+        if (isReadingUsernames) {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(fileName));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(":");
+                    if (parts.length > 0) {
+                        String username = parts[0].trim().toLowerCase().replace("[", "").replace("]", "").replace(", ", ":");
+                        validUsernames.add(username);
+                    }
                 }
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            reader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            
+        } else {
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(fileName));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(":");
+                    if (parts.length > 0) {
+                        String username = (parts[0] + parts[1]).trim().toLowerCase().replace("[", "").replace("]", "").replace(", ", ":");
+                        validUsernames.add(username);
+                    }
+                }
+                reader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         return validUsernames;
     }
