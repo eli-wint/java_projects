@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FileIO {
@@ -65,6 +64,7 @@ public class FileIO {
             }
             
         } else {
+            validUsernames.clear();
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(fileName));
                 String line;

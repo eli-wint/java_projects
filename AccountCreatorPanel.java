@@ -1,20 +1,22 @@
 // Make saveable passwords, link passwords to account names and make account tabs.
+/* GOALS:
+ * - Make custom account tabs
+ * - Allow user to create txt files
+ * - Allow user to edit txt files
+ * - Allow user to log out
+ * - Allow user to save files
+ * - Allow users to share files
+ * - Edit username
+ */
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import javax.sound.sampled.Line;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -71,6 +73,7 @@ public class AccountCreatorPanel {
                 if (isLoggingIn) {
                     updateLogin();
                 } else {
+                    // for making account
                     updateLabel();
                 }
             }
@@ -120,9 +123,10 @@ public class AccountCreatorPanel {
                 panel.remove(loginButton);
                 panel.remove(createAccountButton);
                 label.setText("Username");
-                panel.add(suggestionLabel);
+                panel.add(label);
                 panel.add(textInput);
                 panel.add(enterButton);
+                panel.add(suggestionLabel); 
                 frame.revalidate();
                 frame.repaint();
             }
@@ -187,23 +191,38 @@ public class AccountCreatorPanel {
                     List<String> validUsernames = FileIO.validUsernames;
                     FileIO.ReadFile("AccountUsernames.txt", true);
                     if (validUsernames.contains(textInput.getText().toLowerCase())) {
-                        // if it is the username + " : " + the password
+
+                        panel.remove(textInput);
+                        panel.remove(enterButton);
+                        panel.remove(suggestionLabel);
+                        panel.remove(label);
+                        
+                        panel.add(label);
+                        panel.add(textInput);
+                        panel.add(enterButton);
+
+                        // if it is the username + "  " + the password
                         isCheckingPassword = true;
                         passedUsername = textInput.getText();
                         System.out.println("Good username");
-                        panel.remove(suggestionLabel);
-                        panel.add(BorderLayout.WEST,label);
                         textInput.setText("");
                         label.setText("Enter Password");
                         frame.remove(warningLabel);
+                        frame.revalidate();
+                        frame.repaint();
                     }
                         if (isCheckingPassword) {
                             System.out.println("Checking Password");
-                            System.err.println(passedUsername + " : " + textInput.getText());
+                            System.out.println(passedUsername + "  " + textInput.getText());
                             System.out.println(FileIO.ReadFile("AccountUsernames.txt", false));
-                            if (FileIO.ReadFile("AccountUsernames.txt", false).contains(passedUsername.toLowerCase() + " : " + textInput.getText().toLowerCase())){
+                            if (FileIO.ReadFile("AccountUsernames.txt", false).contains(passedUsername.toLowerCase() + "  " + textInput.getText().toLowerCase())){
                                 textInput.setText("");
                                 System.out.println("Password is correct!");
+                                panel.remove(textInput);
+                                panel.remove(enterButton);
+                                label.setText("Welcome! " + passedUsername);
+                                frame.revalidate();
+                                frame.repaint();
                             }
                         
                     }
