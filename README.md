@@ -1,1 +1,4 @@
-The goal is to make a fully working login UI that will stor usernames with passwords and will also open an actual UI/app regarding the account
+Projects
+- Account Creator (COMPLETE)
+- Account Login (COMPLETE)
+- Full Account UI with Account Creation and Login (W.I.P)
