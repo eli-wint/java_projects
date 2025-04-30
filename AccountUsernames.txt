@@ -1,7 +1,2 @@
-jack : password
-jackson : pwrod
-josh : dunn
-jhon : another_password
-bob : password
-steeeeeve : password
-steeeeve : P@SSW0RD
+John : jacobjingleheimerschmidt
+josh : dun

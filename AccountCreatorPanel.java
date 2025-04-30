@@ -10,6 +10,8 @@
  */
 
 import java.awt.BorderLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -54,10 +57,20 @@ public class AccountCreatorPanel {
         JButton enterButton = new JButton("Continue");
         JButton createAccountButton = new JButton("Create Account");
         JButton loginButton = new JButton("Login");
+        JComboBox<String> menu = new JComboBox<>();
+        GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        //JTabbedPane accountTab = new JTabbedPane();
+        //JMenuBar accountMenu = new JMenuBar();
+        //JMenuItem home = new JMenuItem();
         textInput.setSize(100, 10);
 
-        panel.add(createAccountButton);
-        panel.add(loginButton);
+        panel.setLayout(new GridBagLayout());
+
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        panel.add(createAccountButton, gridBagConstraints);
+        gridBagConstraints.gridy = 1;
+        panel.add(loginButton, gridBagConstraints);
 
         //panel.add(label);
         //panel.add(textInput);
@@ -118,15 +131,21 @@ public class AccountCreatorPanel {
 
         loginButton.addActionListener((ActionEvent b) -> {
             if (b.getSource() == loginButton) {
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 0;
                 isLoggingIn = true;
                 FileIO.ReadFile("AccountUsernames.txt", true);
                 panel.remove(loginButton);
                 panel.remove(createAccountButton);
                 label.setText("Username");
-                panel.add(label);
-                panel.add(textInput);
-                panel.add(enterButton);
-                panel.add(suggestionLabel); 
+                panel.add(label, gridBagConstraints);
+                gridBagConstraints.gridx = 1;
+                panel.add(textInput, gridBagConstraints);
+                gridBagConstraints.gridx = 2;
+                panel.add(enterButton,gridBagConstraints);
+                gridBagConstraints.gridx = 1;
+                gridBagConstraints.gridy = 1;
+                panel.add(suggestionLabel,gridBagConstraints);
                 frame.revalidate();
                 frame.repaint();
             }
@@ -134,6 +153,8 @@ public class AccountCreatorPanel {
 
         createAccountButton.addActionListener((ActionEvent a) -> {
             if (a.getSource() == createAccountButton) {
+                gridBagConstraints.gridx = 0;
+                gridBagConstraints.gridy = 0;
                 accountCreation = true;
                 nameHasBeenRead = false;
                 label.setText("Enter Username: ");
@@ -141,8 +162,10 @@ public class AccountCreatorPanel {
                 panel.remove(label);
                 panel.remove(loginButton);
                 panel.remove(createAccountButton);
-                panel.add(label);
-                panel.add(textInput);
+                panel.add(label,gridBagConstraints);
+                gridBagConstraints.gridx = 1;
+                panel.add(textInput, gridBagConstraints);
+                gridBagConstraints.gridx = 2;
                 panel.add(enterButton);
                 panel.add(suggestionLabel);
                 frame.revalidate();
@@ -184,6 +207,7 @@ public class AccountCreatorPanel {
                     panel.remove(enterButton);
                     panel.remove(suggestionLabel);
                     panel.add(createAccountButton);
+                    panel.add(loginButton);
                     frame.revalidate();
                     frame.repaint();
                     FileIO.accountCreation = false;
@@ -220,7 +244,16 @@ public class AccountCreatorPanel {
                                 System.out.println("Password is correct!");
                                 panel.remove(textInput);
                                 panel.remove(enterButton);
-                                label.setText("Welcome! " + passedUsername);
+                                gridBagConstraints.gridx = 0;
+                                gridBagConstraints.gridy = 1;
+                                gridBagConstraints.anchor = gridBagConstraints.HORIZONTAL;
+                                panel.add(menu);
+                                menu.addItem("Home");
+                                //frame.add(accountMenu);
+                                //accountMenu.add(home);
+                                //frame.add(accountTab);
+                                //accountTab.add("Home", label);
+                                label.setText("Welcome: " + passedUsername.substring(0,1).toUpperCase() + passedUsername.substring(1));
                                 frame.revalidate();
                                 frame.repaint();
                             }
