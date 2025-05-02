@@ -1,4 +1,7 @@
-
+//  This function reads the file and writes to the file, FileProcessor(text, file); and 
+// FileReader(file, isReadingUsernames); and returns a List<String> of everything in the file
+// (preferably formatted with "text : text")
+// NOTE: the return REMOVES all ":" which means the text will look like "text  text" rather than "text text"
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;

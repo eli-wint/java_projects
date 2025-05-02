@@ -1,4 +1,4 @@
-// Useless until I find a use... (potential for making saveable accounts?)
+// This entire class is useless at the moment, might find something it can be used for in the future
 public class AccountCreator {
     private static String username;
     private static String password;

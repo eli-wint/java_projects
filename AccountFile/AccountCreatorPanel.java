@@ -1,12 +1,12 @@
 // Make saveable passwords, link passwords to account names and make account tabs.
 /* GOALS:
- * - Make custom account tabs
- * - Allow user to create txt files
- * - Allow user to edit txt files
- * - Allow user to log out
- * - Allow user to save files
- * - Allow users to share files
- * - Edit username
+ * - Make custom account tabs (priorty #1)
+ * - Allow user to create txt files (priority #5)
+ * - Allow user to edit txt files (priority #3)
+ * - Allow user to log out (priority #2)
+ * - Allow user to save files (priority #4)
+ * - Allow users to share files (priority #7)
+ * - Edit username (priority #6)
  */
 
 import java.awt.BorderLayout;
