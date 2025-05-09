@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class Code {
     public static void main(String[] args) {
         System.out.println("Hello");
@@ -28,5 +30,28 @@ public class Code {
         char[] character = {'a', 'b', 'c'};
         String[] words ={"Moose", "Pizza", "Dictionary"};
         float[] floatingPoints = {3.1f, 9.4f, 4.6f};
+
+        Scanner input = new Scanner(System.in);
+         System.out.println("Enter your name:");
+         String name = input.nextLine();
+         System.out.println("Hello! " + name + ".");
+        
+         System.out.println("Please type in a decimal number:");
+         double dNum = input.nextDouble();
+         System.out.println(dNum + "... That's a good number!");
+        
+         System.out.println("Give me a number to count to.");
+         int iNum = input.nextInt();
+         System.out.println("Here we go!");
+        
+         //for (int x = 0; x <= iNum; x++) {
+         //    System.out.println(x);
+         //}
+        
+         System.out.println("Give me a number to count down from.");
+         int iNum2 = input.nextInt();
+         for (int x = 1; x <= iNum2; iNum2--) {
+             System.out.println(iNum2);
+        }
     }
 }
