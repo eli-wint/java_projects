@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -33,9 +34,14 @@ public class PlateSaver {
     private static JComboBox<String> menu = new JComboBox<>();
     private static GridBagConstraints gBagConst = new GridBagConstraints();
     public static JPanel panel = new JPanel(new GridLayout(0, 3));
+    private static JCheckBox waCheckBox = new JCheckBox("Washington State");
 
     public static void main(String[] args) {
         states = FileIO.ReadFile("data.txt", false);
+        if (states.contains("washington : 1")) {
+            hasWashington = true;
+            System.err.println("success");
+        }
 
         frame.setSize(500, 125);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,9 +64,30 @@ public class PlateSaver {
         frame.getContentPane().add(BorderLayout.NORTH, panel);
         frame.setVisible(true);
 
-        plateMapButton.addActionListener((ActionEvent b) -> {
-            if (b.getSource() == plateMapButton) {
+        plateMapButton.addActionListener((ActionEvent a) -> {
+            if (a.getSource() == plateMapButton) {
                 System.out.println(states);
+                panel.remove(plateMapButton);
+                panel.remove(indexButton);
+                panel.add(continueButton);
+                continueButton.setText("Main Menu");
+                panel.add(waCheckBox);
+                frame.repaint();
+                frame.revalidate();
+            }
+        });
+
+        continueButton.addActionListener((ActionEvent b) -> {
+            if (b.getSource() == continueButton) {
+                if (hasWashington) {
+                    waCheckBox.setSelected(false);
+                }
+                panel.remove(continueButton);
+                panel.remove(waCheckBox);
+                panel.add(plateMapButton);
+                panel.add(indexButton);
+                frame.repaint();
+                frame.revalidate();
             }
         });
 

@@ -1,2 +1,2 @@
-washington : 0
+washington : 1
 oregon : 1
