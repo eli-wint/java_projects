@@ -1,0 +1,452 @@
+private static boolean hasAlabama = false;
+    private static boolean hasAlaska = false;
+    private static boolean hasArizona = false;
+    private static boolean hasArkansas = false;
+    private static boolean hasCalifornia = false;
+    private static boolean hasColorado = false;
+    private static boolean hasConnecticut = false;
+    private static boolean hasDelaware = false;
+    private static boolean hasFlorida = false;
+    private static boolean hasGeorgia = false;
+    private static boolean hasHawaii = false;
+    private static boolean hasIdaho = false;
+    private static boolean hasIllinois = false;
+    private static boolean hasIndiana = false;
+    private static boolean hasIowa = false;
+    private static boolean hasKansas = false;
+    private static boolean hasKentucky = false;
+    private static boolean hasLouisiana = false;
+    private static boolean hasMaine = false;
+    private static boolean hasMaryland = false;
+    private static boolean hasMassachusetts = false;
+    private static boolean hasMichigan = false;
+    private static boolean hasMinnesota = false;
+    private static boolean hasMississippi = false;
+    private static boolean hasMissouri = false;
+    private static boolean hasMontana = false;
+    private static boolean hasNebraska = false;
+    private static boolean hasNevada = false;
+    private static boolean hasNewHampshire = false;
+    private static boolean hasNewJersey = false;
+    private static boolean hasNewMexico = false;
+    private static boolean hasNewYork = false;
+    private static boolean hasNorthCarolina = false;
+    private static boolean hasNorthDakota = false;
+    private static boolean hasOhio = false;
+    private static boolean hasOklahoma = false;
+    private static boolean hasOregon = false;
+    private static boolean hasPennsylvania = false;
+    private static boolean hasRhodeIsland = false;
+    private static boolean hasSouthCarolina = false;
+    private static boolean hasSouthDakota = false;
+    private static boolean hasTennessee = false;
+    private static boolean hasTexas = false;
+    private static boolean hasUtah = false;
+    private static boolean hasVermont = false;
+    private static boolean hasVirginia = false;
+    private static boolean hasWestVirginia = false;
+    private static boolean hasWisconsin = false;
+    private static boolean hasWyoming = false;
+    private static boolean hasWashington = false;
+
+    private static JCheckBox alabamaCheckBox = new JCheckBox("Alabama");
+    private static JCheckBox alaskaCheckBox = new JCheckBox("Alaska");
+    private static JCheckBox arizonaCheckBox = new JCheckBox("Arizona");
+    private static JCheckBox arkansasCheckBox = new JCheckBox("Arkansas");
+    private static JCheckBox californiaCheckBox = new JCheckBox("California");
+    private static JCheckBox coloradoCheckBox = new JCheckBox("Colorado");
+    private static JCheckBox connecticutCheckBox = new JCheckBox("Connecticut");
+    private static JCheckBox delawareCheckBox = new JCheckBox("Delaware");
+    private static JCheckBox floridaCheckBox = new JCheckBox("Florida");
+    private static JCheckBox georgiaCheckBox = new JCheckBox("Georgia");
+    private static JCheckBox hawaiiCheckBox = new JCheckBox("Hawaii");
+    private static JCheckBox idahoCheckBox = new JCheckBox("Idaho");
+    private static JCheckBox illinoisCheckBox = new JCheckBox("Illinois");
+    private static JCheckBox indianaCheckBox = new JCheckBox("Indiana");
+    private static JCheckBox iowaCheckBox = new JCheckBox("Iowa");
+    private static JCheckBox kansasCheckBox = new JCheckBox("Kansas");
+    private static JCheckBox kentuckyCheckBox = new JCheckBox("Kentucky");
+    private static JCheckBox louisianaCheckBox = new JCheckBox("Louisiana");
+    private static JCheckBox maineCheckBox = new JCheckBox("Maine");
+    private static JCheckBox marylandCheckBox = new JCheckBox("Maryland");
+    private static JCheckBox massachusettsCheckBox = new JCheckBox("Massachusetts");
+    private static JCheckBox michiganCheckBox = new JCheckBox("Michigan");
+    private static JCheckBox minnesotaCheckBox = new JCheckBox("Minnesota");
+    private static JCheckBox mississippiCheckBox = new JCheckBox("Mississippi");
+    private static JCheckBox missouriCheckBox = new JCheckBox("Missouri");
+    private static JCheckBox montanaCheckBox = new JCheckBox("Montana");
+    private static JCheckBox nebraskaCheckBox = new JCheckBox("Nebraska");
+    private static JCheckBox nevadaCheckBox = new JCheckBox("Nevada");
+    private static JCheckBox new_hampshireCheckBox = new JCheckBox("New Hampshire");
+    private static JCheckBox new_jerseyCheckBox = new JCheckBox("New Jersey");
+    private static JCheckBox new_mexicoCheckBox = new JCheckBox("New Mexico");
+    private static JCheckBox new_yorkCheckBox = new JCheckBox("New York");
+    private static JCheckBox north_carolinaCheckBox = new JCheckBox("North Carolina");
+    private static JCheckBox north_dakotaCheckBox = new JCheckBox("North Dakota");
+    private static JCheckBox ohioCheckBox = new JCheckBox("Ohio");
+    private static JCheckBox oklahomaCheckBox = new JCheckBox("Oklahoma");
+    private static JCheckBox oregonCheckBox = new JCheckBox("Oregon");
+    private static JCheckBox pennsylvaniaCheckBox = new JCheckBox("Pennsylvania");
+    private static JCheckBox rhode_islandCheckBox = new JCheckBox("Rhode Island");
+    private static JCheckBox south_carolinaCheckBox = new JCheckBox("South Carolina");
+    private static JCheckBox south_dakotaCheckBox = new JCheckBox("South Dakota");
+    private static JCheckBox tennesseeCheckBox = new JCheckBox("Tennessee");
+    private static JCheckBox texasCheckBox = new JCheckBox("Texas");
+    private static JCheckBox utahCheckBox = new JCheckBox("Utah");
+    private static JCheckBox vermontCheckBox = new JCheckBox("Vermont");
+    private static JCheckBox virginiaCheckBox = new JCheckBox("Virginia");
+    private static JCheckBox west_virginiaCheckBox = new JCheckBox("West Virginia");
+    private static JCheckBox wisconsinCheckBox = new JCheckBox("Wisconsin");
+    private static JCheckBox wyomingCheckBox = new JCheckBox("Wyoming");
+    private static JCheckBox washingtonCheckBox = new JCheckBox("Washington");
+
+    if (states.contains("alabama : 1")) {
+            hasAlabama = true;
+            alabamaCheckBox.setSelected(true);
+        } else {
+            hasAlabama = false;
+            alabamaCheckBox.setSelected(false);
+        }
+        if (states.contains("alaska : 1")) {
+            hasAlaska = true;
+            alaskaCheckBox.setSelected(true);
+        } else {
+            hasAlaska = false;
+            alaskaCheckBox.setSelected(false);
+        }
+        if (states.contains("arizona : 1")) {
+            hasArizona = true;
+            arizonaCheckBox.setSelected(true);
+        } else {
+            hasArizona = false;
+            arizonaCheckBox.setSelected(false);
+        }
+        if (states.contains("arkansas : 1")) {
+            hasArkansas = true;
+            arkansasCheckBox.setSelected(true);
+        } else {
+            hasArkansas = false;
+            arkansasCheckBox.setSelected(false);
+        }
+        if (states.contains("california : 1")) {
+            hasCalifornia = true;
+            californiaCheckBox.setSelected(true);
+        } else {
+            hasCalifornia = false;
+            californiaCheckBox.setSelected(false);
+        }
+        if (states.contains("colorado : 1")) {
+            hasColorado = true;
+            coloradoCheckBox.setSelected(true);
+        } else {
+            hasColorado = false;
+            coloradoCheckBox.setSelected(false);
+        }
+        if (states.contains("connecticut : 1")) {
+            hasConnecticut = true;
+            connecticutCheckBox.setSelected(true);
+        } else {
+            hasConnecticut = false;
+            connecticutCheckBox.setSelected(false);
+        }
+        if (states.contains("delaware : 1")) {
+            hasDelaware = true;
+            delawareCheckBox.setSelected(true);
+        } else {
+            hasDelaware = false;
+            delawareCheckBox.setSelected(false);
+        }
+        if (states.contains("florida : 1")) {
+            hasFlorida = true;
+            floridaCheckBox.setSelected(true);
+        } else {
+            hasFlorida = false;
+            floridaCheckBox.setSelected(false);
+        }
+        if (states.contains("georgia : 1")) {
+            hasGeorgia = true;
+            georgiaCheckBox.setSelected(true);
+        } else {
+            hasGeorgia = false;
+            georgiaCheckBox.setSelected(false);
+        }
+        if (states.contains("hawaii : 1")) {
+            hasHawaii = true;
+            hawaiiCheckBox.setSelected(true);
+        } else {
+            hasHawaii = false;
+            hawaiiCheckBox.setSelected(false);
+        }
+        if (states.contains("idaho : 1")) {
+            hasIdaho = true;
+            idahoCheckBox.setSelected(true);
+        } else {
+            hasIdaho = false;
+            idahoCheckBox.setSelected(false);
+        }
+        if (states.contains("illinois : 1")) {
+            hasIllinois = true;
+            illinoisCheckBox.setSelected(true);
+        } else {
+            hasIllinois = false;
+            illinoisCheckBox.setSelected(false);
+        }
+        if (states.contains("indiana : 1")) {
+            hasIndiana = true;
+            indianaCheckBox.setSelected(true);
+        } else {
+            hasIndiana = false;
+            indianaCheckBox.setSelected(false);
+        }
+        if (states.contains("iowa : 1")) {
+            hasIowa = true;
+            iowaCheckBox.setSelected(true);
+        } else {
+            hasIowa = false;
+            iowaCheckBox.setSelected(false);
+        }
+        if (states.contains("kansas : 1")) {
+            hasKansas = true;
+            kansasCheckBox.setSelected(true);
+        } else {
+            hasKansas = false;
+            kansasCheckBox.setSelected(false);
+        }
+        if (states.contains("kentucky : 1")) {
+            hasKentucky = true;
+            kentuckyCheckBox.setSelected(true);
+        } else {
+            hasKentucky = false;
+            kentuckyCheckBox.setSelected(false);
+        }
+        if (states.contains("louisiana : 1")) {
+            hasLouisiana = true;
+            louisianaCheckBox.setSelected(true);
+        } else {
+            hasLouisiana = false;
+            louisianaCheckBox.setSelected(false);
+        }
+        if (states.contains("maine : 1")) {
+            hasMaine = true;
+            maineCheckBox.setSelected(true);
+        } else {
+            hasMaine = false;
+            maineCheckBox.setSelected(false);
+        }
+        if (states.contains("maryland : 1")) {
+            hasMaryland = true;
+            marylandCheckBox.setSelected(true);
+        } else {
+            hasMaryland = false;
+            marylandCheckBox.setSelected(false);
+        }
+        if (states.contains("massachusetts : 1")) {
+            hasMassachusetts = true;
+            massachusettsCheckBox.setSelected(true);
+        } else {
+            hasMassachusetts = false;
+            massachusettsCheckBox.setSelected(false);
+        }
+        if (states.contains("michigan : 1")) {
+            hasMichigan = true;
+            michiganCheckBox.setSelected(true);
+        } else {
+            hasMichigan = false;
+            michiganCheckBox.setSelected(false);
+        }
+        if (states.contains("minnesota : 1")) {
+            hasMinnesota = true;
+            minnesotaCheckBox.setSelected(true);
+        } else {
+            hasMinnesota = false;
+            minnesotaCheckBox.setSelected(false);
+        }
+        if (states.contains("mississippi : 1")) {
+            hasMississippi = true;
+            mississippiCheckBox.setSelected(true);
+        } else {
+            hasMississippi = false;
+            mississippiCheckBox.setSelected(false);
+        }
+        if (states.contains("missouri : 1")) {
+            hasMissouri = true;
+            missouriCheckBox.setSelected(true);
+        } else {
+            hasMissouri = false;
+            missouriCheckBox.setSelected(false);
+        }
+        if (states.contains("montana : 1")) {
+            hasMontana = true;
+            montanaCheckBox.setSelected(true);
+        } else {
+            hasMontana = false;
+            montanaCheckBox.setSelected(false);
+        }
+        if (states.contains("nebraska : 1")) {
+            hasNebraska = true;
+            nebraskaCheckBox.setSelected(true);
+        } else {
+            hasNebraska = false;
+            nebraskaCheckBox.setSelected(false);
+        }
+        if (states.contains("nevada : 1")) {
+            hasNevada = true;
+            nevadaCheckBox.setSelected(true);
+        } else {
+            hasNevada = false;
+            nevadaCheckBox.setSelected(false);
+        }
+        if (states.contains("new hampshire : 1")) {
+            hasNewHampshire = true;
+            new_hampshireCheckBox.setSelected(true);
+        } else {
+            hasNewHampshire = false;
+            new_hampshireCheckBox.setSelected(false);
+        }
+        if (states.contains("new jersey : 1")) {
+            hasNewJersey = true;
+            new_jerseyCheckBox.setSelected(true);
+        } else {
+            hasNewJersey = false;
+            new_jerseyCheckBox.setSelected(false);
+        }
+        if (states.contains("new mexico : 1")) {
+            hasNewMexico = true;
+            new_mexicoCheckBox.setSelected(true);
+        } else {
+            hasNewMexico = false;
+            new_mexicoCheckBox.setSelected(false);
+        }
+        if (states.contains("new york : 1")) {
+            hasNewYork = true;
+            new_yorkCheckBox.setSelected(true);
+        } else {
+            hasNewYork = false;
+            new_yorkCheckBox.setSelected(false);
+        }
+        if (states.contains("north carolina : 1")) {
+            hasNorthCarolina = true;
+            north_carolinaCheckBox.setSelected(true);
+        } else {
+            hasNorthCarolina = false;
+            north_carolinaCheckBox.setSelected(false);
+        }
+        if (states.contains("north dakota : 1")) {
+            hasNorthDakota = true;
+            north_dakotaCheckBox.setSelected(true);
+        } else {
+            hasNorthDakota = false;
+            north_dakotaCheckBox.setSelected(false);
+        }
+        if (states.contains("ohio : 1")) {
+            hasOhio = true;
+            ohioCheckBox.setSelected(true);
+        } else {
+            hasOhio = false;
+            ohioCheckBox.setSelected(false);
+        }
+        if (states.contains("oklahoma : 1")) {
+            hasOklahoma = true;
+            oklahomaCheckBox.setSelected(true);
+        } else {
+            hasOklahoma = false;
+            oklahomaCheckBox.setSelected(false);
+        }
+        if (states.contains("oregon : 1")) {
+            hasOregon = true;
+            oregonCheckBox.setSelected(true);
+        } else {
+            hasOregon = false;
+            oregonCheckBox.setSelected(false);
+        }
+        if (states.contains("pennsylvania : 1")) {
+            hasPennsylvania = true;
+            pennsylvaniaCheckBox.setSelected(true);
+        } else {
+            hasPennsylvania = false;
+            pennsylvaniaCheckBox.setSelected(false);
+        }
+        if (states.contains("rhode island : 1")) {
+            hasRhodeIsland = true;
+            rhode_islandCheckBox.setSelected(true);
+        } else {
+            hasRhodeIsland = false;
+            rhode_islandCheckBox.setSelected(false);
+        }
+        if (states.contains("south carolina : 1")) {
+            hasSouthCarolina = true;
+            south_carolinaCheckBox.setSelected(true);
+        } else {
+            hasSouthCarolina = false;
+            south_carolinaCheckBox.setSelected(false);
+        }
+        if (states.contains("south dakota : 1")) {
+            hasSouthDakota = true;
+            south_dakotaCheckBox.setSelected(true);
+        } else {
+            hasSouthDakota = false;
+            south_dakotaCheckBox.setSelected(false);
+        }
+        if (states.contains("tennessee : 1")) {
+            hasTennessee = true;
+            tennesseeCheckBox.setSelected(true);
+        } else {
+            hasTennessee = false;
+            tennesseeCheckBox.setSelected(false);
+        }
+        if (states.contains("texas : 1")) {
+            hasTexas = true;
+            texasCheckBox.setSelected(true);
+        } else {
+            hasTexas = false;
+            texasCheckBox.setSelected(false);
+        }
+        if (states.contains("utah : 1")) {
+            hasUtah = true;
+            utahCheckBox.setSelected(true);
+        } else {
+            hasUtah = false;
+            utahCheckBox.setSelected(false);
+        }
+        if (states.contains("vermont : 1")) {
+            hasVermont = true;
+            vermontCheckBox.setSelected(true);
+        } else {
+            hasVermont = false;
+            vermontCheckBox.setSelected(false);
+        }
+        if (states.contains("virginia : 1")) {
+            hasVirginia = true;
+            virginiaCheckBox.setSelected(true);
+        } else {
+            hasVirginia = false;
+            virginiaCheckBox.setSelected(false);
+        }
+        if (states.contains("west virginia : 1")) {
+            hasWestVirginia = true;
+            west_virginiaCheckBox.setSelected(true);
+        } else {
+            hasWestVirginia = false;
+            west_virginiaCheckBox.setSelected(false);
+        }
+        if (states.contains("wisconsin : 1")) {
+            hasWisconsin = true;
+            wisconsinCheckBox.setSelected(true);
+        } else {
+            hasWisconsin = false;
+            wisconsinCheckBox.setSelected(false);
+        }
+        if (states.contains("wyoming : 1")) {
+            hasWyoming = true;
+            wyomingCheckBox.setSelected(true);
+        } else {
+            hasWyoming = false;
+            wyomingCheckBox.setSelected(false);
+        }
+        if (states.contains("washington : 1")) {
+            hasWashington = true;
+            washingtonCheckBox.setSelected(true);
+        } else {
+            hasWashington = false;
+            washingtonCheckBox.setSelected(false);
+        }

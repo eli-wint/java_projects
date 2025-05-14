@@ -2,6 +2,7 @@
 // FileReader(file, isReadingUsernames); and returns a List<String> of everything in the file
 // (preferably formatted with "text : text")
 // NOTE: the return REMOVES all ":" which means the text will look like "text  text" rather than "text text"
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -18,34 +19,17 @@ public class FileIO {
     public static List<String> savedPlates = new ArrayList<>();
 
     @SuppressWarnings({"ConvertToTryWithResources", "CallToPrintStackTrace"})
-    static void FileProcessor(String input, String fileUsed) {
-        if (accountCreation == true) {
-            try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(fileUsed, true)); // Append mode
-                writer.write(input.replace(", ", "\n").replace("[", "").replace("]", ""));
-                writer.newLine();
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    static void FileProcessor(List<String> input, String fileUsed) {
 
-        if (startupNotComplete == true) {
-            startupNotComplete = false;
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(fileUsed));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split(":");
-                    if (parts.length > 0) {
-                        String username = parts[0].trim().toLowerCase();
-                        accountNames.add(username);
-                    }
-                }
-                reader.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileUsed));
+            for (String line : input) {
+                writer.write(line);
+                writer.newLine();
             }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -65,7 +49,7 @@ public class FileIO {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            
+
         } else {
             savedPlates.clear();
             try {
