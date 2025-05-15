@@ -4,6 +4,7 @@
  */
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
@@ -25,7 +26,7 @@ import javax.swing.JTextField;
 
 public class PlateSaver {
 
-    private static JFrame frame = new JFrame("PlateSaver");
+    private static JFrame frame = new JFrame("PlateMapper");
 
     private static List<String> states = new ArrayList();
     private static JTextField textInput = new JTextField(10);
@@ -97,7 +98,7 @@ public class PlateSaver {
     }
 
     public static void main(String[] args) {
-        changeBackground("Plate Finder.jpg");
+        changeBackground("PlateMapperBG.jpg");
 
         states = FileIO.ReadFile("data.txt", false);
         panel.setLayout(null);
@@ -105,9 +106,12 @@ public class PlateSaver {
         frame.setSize(948, 548);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        plateMapButton.setFont(new Font("Arial", Font.PLAIN, 32));
+        indexButton.setFont(new Font("Arial", Font.PLAIN, 32));
+
         //textInput.setSize(100, 10);
-        plateMapButton.setBounds(374, 125, 100, 25);
-        indexButton.setBounds(474, 125, 100, 25);
+        plateMapButton.setBounds(273, 100, 200, 50);
+        indexButton.setBounds(475, 100, 200, 50);
         continueButton.setBounds(0, 0, 100, 25);
         saveButton.setBounds(0, 30, 100, 25);
 
@@ -139,18 +143,18 @@ public class PlateSaver {
                 statePositions.put("idaho", new int[]{155, 103});
                 statePositions.put("nevada", new int[]{92, 172});
                 statePositions.put("utah", new int[]{188, 200});
-                statePositions.put("arizona", new int[]{160,275});
+                statePositions.put("arizona", new int[]{160, 275});
                 statePositions.put("wyoming", new int[]{256, 129});
-                statePositions.put("colorado", new int[]{274,209});
+                statePositions.put("colorado", new int[]{274, 209});
                 statePositions.put("new mexico", new int[]{249, 284});
                 statePositions.put("north dakota", new int[]{360, 64});
-                statePositions.put("south dakota", new int[]{360,115});
+                statePositions.put("south dakota", new int[]{360, 115});
                 statePositions.put("nebraska", new int[]{376, 168});
                 statePositions.put("kansas", new int[]{396, 223});
                 statePositions.put("oklahoma", new int[]{411, 276});
                 statePositions.put("texas", new int[]{391, 347});
                 statePositions.put("minnesota", new int[]{466, 67});
-                statePositions.put("iowa", new int[]{484,158});
+                statePositions.put("iowa", new int[]{484, 158});
 
                 System.out.println(states);
                 panel.remove(plateMapButton);
@@ -181,7 +185,10 @@ public class PlateSaver {
         continueButton.addActionListener((ActionEvent b) -> {
             if (b.getSource() == continueButton) {
 
-                changeBackground("Plate Finder.jpg");
+                plateMapButton.setFont(new Font("Arial", Font.PLAIN, 32));
+                indexButton.setFont(new Font("Arial", Font.PLAIN, 32));
+
+                changeBackground("PlateMapperBG.jpg");
 
                 for (JCheckBox cb : stateCheckboxes.values()) {
                     panel.remove(cb);
