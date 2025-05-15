@@ -1,8 +1,8 @@
 florida : 1
-arkansas : 0
-nebraska : 0
+arkansas : 1
+nebraska : 1
 ohio : 1
-texas : 0
+texas : 1
 missouri : 1
 georgia : 1
 alaska : 1
