@@ -158,6 +158,15 @@ public class PlateSaver {
                 statePositions.put("missouri", new int[]{498, 221});
                 statePositions.put("arkansas", new int[]{500, 280});
                 statePositions.put("louisiana", new int[]{515, 360});
+                statePositions.put("wisconsin", new int[]{526, 105});
+                statePositions.put("illinois", new int[]{552, 192});
+                statePositions.put("kentucky", new int[]{616, 236});
+                statePositions.put("tennessee", new int[]{587, 264});
+                statePositions.put("mississippi", new int[]{564, 320});
+                statePositions.put("michigan", new int[]{635, 120});
+                statePositions.put("indiana", new int[]{617,192});
+                statePositions.put("alabama", new int[]{615, 304});
+                statePositions.put("ohio", new int[]{660, 175});
 
                 System.out.println(states);
                 panel.remove(plateMapButton);

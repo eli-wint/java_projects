@@ -30,8 +30,8 @@ rhode island : 0
 tennessee : 0
 new jersey : 0
 west virginia : 0
-montana : 1
-idaho : 1
+montana : 0
+idaho : 0
 kentucky : 0
 wisconsin : 0
 maine : 0
