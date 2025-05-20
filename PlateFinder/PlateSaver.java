@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -26,16 +27,19 @@ import javax.swing.JTextField;
 
 public class PlateSaver {
 
-    private static JFrame frame = new JFrame("PlateMapper");
+    private static JFrame frame = new JFrame("Plate Mapper");
 
-    private static List<String> states = new ArrayList();
+    private static ImageIcon plateMapIcon = new ImageIcon("Plate Map.jpg");
+    private static ImageIcon plateIndexIcon = new ImageIcon("Map Index.jpg");
+
+    private static List<String> states = new ArrayList<>();
     private static JTextField textInput = new JTextField(10);
     private static JLabel label = new JLabel("Enter Username: ");
     private static JLabel warningLabel = new JLabel("INVALID INPUT");
     private static JLabel suggestionLabel = new JLabel("Enter a username.");
     private static JButton continueButton = new JButton("Continue");
-    private static JButton plateMapButton = new JButton("Plate Map");
-    private static JButton indexButton = new JButton("Plate Index");
+    private static JButton plateMapButton = new JButton(plateMapIcon);
+    private static JButton indexButton = new JButton(plateIndexIcon);
     private static JComboBox<String> menu = new JComboBox<>();
     private static GridBagConstraints gBagConst = new GridBagConstraints();
     //private static JPanel panel = new JPanel();
@@ -60,6 +64,7 @@ public class PlateSaver {
 
         for (String state : statesArray) {
             JCheckBox cb = new JCheckBox(toTitleCase(state));
+            cb.setFont(new Font("Arial", Font.PLAIN, 9));
             stateCheckboxes.put(state, cb);
             cb.setOpaque(false);
         }
@@ -98,7 +103,13 @@ public class PlateSaver {
     }
 
     public static void main(String[] args) {
-        changeBackground("PlateMapperBG.jpg");
+
+        indexButton.setBorderPainted(false);
+        plateMapButton.setBorderPainted(false);
+        indexButton.setContentAreaFilled(false);
+        plateMapButton.setContentAreaFilled(false);
+
+        changeBackground("Plate Mapper.jpg");
 
         states = FileIO.ReadFile("data.txt", false);
         panel.setLayout(null);
@@ -136,37 +147,55 @@ public class PlateSaver {
 
                 Map<String, int[]> statePositions = new HashMap<>();
 
-                statePositions.put("washington", new int[]{64, 28});
-                statePositions.put("oregon", new int[]{52, 88});
+                statePositions.put("washington", new int[]{84, 28});
+                statePositions.put("oregon", new int[]{62, 88});
                 statePositions.put("california", new int[]{27, 200});
                 statePositions.put("montana", new int[]{243, 58});
-                statePositions.put("idaho", new int[]{155, 103});
-                statePositions.put("nevada", new int[]{92, 172});
-                statePositions.put("utah", new int[]{188, 200});
+                statePositions.put("idaho", new int[]{165, 107});
+                statePositions.put("nevada", new int[]{102, 172});
+                statePositions.put("utah", new int[]{194, 196});
                 statePositions.put("arizona", new int[]{160, 275});
                 statePositions.put("wyoming", new int[]{256, 129});
                 statePositions.put("colorado", new int[]{274, 209});
                 statePositions.put("new mexico", new int[]{249, 284});
-                statePositions.put("north dakota", new int[]{360, 64});
-                statePositions.put("south dakota", new int[]{360, 115});
+                statePositions.put("north dakota", new int[]{370, 64});
+                statePositions.put("south dakota", new int[]{370, 115});
                 statePositions.put("nebraska", new int[]{376, 168});
                 statePositions.put("kansas", new int[]{396, 223});
                 statePositions.put("oklahoma", new int[]{411, 276});
                 statePositions.put("texas", new int[]{391, 347});
                 statePositions.put("minnesota", new int[]{466, 67});
                 statePositions.put("iowa", new int[]{484, 158});
-                statePositions.put("missouri", new int[]{498, 221});
-                statePositions.put("arkansas", new int[]{500, 280});
-                statePositions.put("louisiana", new int[]{515, 360});
+                statePositions.put("missouri", new int[]{508, 221});
+                statePositions.put("arkansas", new int[]{510, 280});
+                statePositions.put("louisiana", new int[]{525, 360});
                 statePositions.put("wisconsin", new int[]{526, 105});
-                statePositions.put("illinois", new int[]{552, 192});
+                statePositions.put("illinois", new int[]{562, 192});
                 statePositions.put("kentucky", new int[]{616, 236});
                 statePositions.put("tennessee", new int[]{587, 264});
                 statePositions.put("mississippi", new int[]{564, 320});
-                statePositions.put("michigan", new int[]{635, 120});
-                statePositions.put("indiana", new int[]{617,192});
+                statePositions.put("michigan", new int[]{625, 120});
+                statePositions.put("indiana", new int[]{617, 192});
                 statePositions.put("alabama", new int[]{615, 304});
-                statePositions.put("ohio", new int[]{660, 175});
+                statePositions.put("ohio", new int[]{670, 175});
+                statePositions.put("georgia",  new int[]{677, 317});
+                statePositions.put("florida", new int[]{720, 375});
+                statePositions.put("new york", new int[]{770, 107});
+                statePositions.put("pennsylvania", new int[]{730, 160});
+                statePositions.put("west virginia", new int[]{712, 202});
+                statePositions.put("virginia", new int[]{744, 222});
+                statePositions.put("north carolina", new int[]{724, 254});
+                statePositions.put("south carolina", new int[]{720, 282});
+                statePositions.put("maryland", new int[]{790, 192});
+                statePositions.put("vermont", new int[]{826, 82});
+                statePositions.put("massachusetts", new int[]{838, 118});
+                statePositions.put("rhode island", new int[]{856, 127});
+                statePositions.put("connecticut", new int[]{835, 136});
+                statePositions.put("new jersey", new int[]{815, 160});
+                statePositions.put("delaware", new int[]{810, 182});
+                statePositions.put("maine", new int[]{860, 50});
+                statePositions.put("alaska", new int[]{100, 380});
+                statePositions.put("hawaii", new int[]{310, 443});
 
                 System.out.println(states);
                 panel.remove(plateMapButton);
