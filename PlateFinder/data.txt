@@ -1,50 +1,50 @@
-florida : 0
+florida : 1
 arkansas : 1
 nebraska : 1
-ohio : 0
+ohio : 1
 texas : 1
 missouri : 1
-georgia : 0
-alaska : 0
+georgia : 1
+alaska : 1
 delaware : 0
 massachusetts : 1
 california : 1
 oklahoma : 1
-new hampshire : 0
-north carolina : 0
-alabama : 0
+new hampshire : 1
+north carolina : 1
+alabama : 1
 louisiana : 1
 kansas : 1
-pennsylvania : 0
-south carolina : 0
+pennsylvania : 1
+south carolina : 1
 utah : 1
 minnesota : 1
 oregon : 1
-virginia : 0
+virginia : 1
 washington : 1
 iowa : 1
 arizona : 1
-maryland : 0
-illinois : 0
-rhode island : 0
-tennessee : 0
-new jersey : 0
+maryland : 1
+illinois : 1
+rhode island : 1
+tennessee : 1
+new jersey : 1
 west virginia : 0
-montana : 0
-idaho : 0
-kentucky : 0
-wisconsin : 0
-maine : 0
+montana : 1
+idaho : 1
+kentucky : 1
+wisconsin : 1
+maine : 1
 nevada : 1
-hawaii : 0
-michigan : 0
-connecticut : 0
+hawaii : 1
+michigan : 1
+connecticut : 1
 colorado : 1
-new york : 0
+new york : 1
 north dakota : 1
 wyoming : 1
 south dakota : 1
-vermont : 0
-mississippi : 0
+vermont : 1
+mississippi : 1
 new mexico : 1
-indiana : 0
+indiana : 1

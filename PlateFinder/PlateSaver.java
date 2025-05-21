@@ -47,7 +47,7 @@ public class PlateSaver {
     private static JButton saveButton = new JButton("Save Data");
     private static String entry;
     private static JButton selectAllButton = new JButton("Select All");
-    private static JButton disselectAllButton = new JButton("Disselect All");
+    private static JButton disselectAllButton = new JButton("Deselect All");
 
     private static Image img;
 
@@ -121,10 +121,12 @@ public class PlateSaver {
         indexButton.setFont(new Font("Arial", Font.PLAIN, 32));
 
         //textInput.setSize(100, 10);
-        plateMapButton.setBounds(273, 100, 200, 50);
-        indexButton.setBounds(475, 100, 200, 50);
-        continueButton.setBounds(0, 0, 100, 25);
-        saveButton.setBounds(0, 30, 100, 25);
+        plateMapButton.setBounds(263, 200, 200, 50);
+        indexButton.setBounds(485, 200, 200, 50);
+        continueButton.setBounds(0, 0, 110, 25);
+        saveButton.setBounds(111, 0, 110, 25);
+        selectAllButton.setBounds(222, 0, 110, 25);
+        disselectAllButton.setBounds(332, 0, 110, 25);
 
         panel.add(plateMapButton);
         panel.add(indexButton);
@@ -142,9 +144,6 @@ public class PlateSaver {
 
         plateMapButton.addActionListener((ActionEvent a) -> {
             if (a.getSource() == plateMapButton) {
-                continueButton.setBounds(0, 0, 100, 25);
-                saveButton.setBounds(100, 0, 100, 25);
-
                 Map<String, int[]> statePositions = new HashMap<>();
 
                 statePositions.put("washington", new int[]{84, 28});
@@ -202,6 +201,8 @@ public class PlateSaver {
                 panel.remove(indexButton);
                 panel.add(continueButton);
                 panel.add(saveButton);
+                panel.add(selectAllButton);
+                panel.add(disselectAllButton);
 
                 changeBackground("us2.jpg");
 
@@ -229,15 +230,18 @@ public class PlateSaver {
                 plateMapButton.setFont(new Font("Arial", Font.PLAIN, 32));
                 indexButton.setFont(new Font("Arial", Font.PLAIN, 32));
 
-                changeBackground("PlateMapperBG.jpg");
+                changeBackground("Plate Mapper.jpg");
 
                 for (JCheckBox cb : stateCheckboxes.values()) {
                     panel.remove(cb);
                 }
-                panel.remove(continueButton);
+                
                 panel.add(plateMapButton);
                 panel.add(indexButton);
+                panel.remove(selectAllButton);
+                panel.remove(disselectAllButton);
                 panel.remove(saveButton);
+                panel.remove(continueButton);
                 frame.repaint();
                 frame.revalidate();
             }
@@ -257,6 +261,38 @@ public class PlateSaver {
                 FileIO.FileProcessor(updatedStates, "data.txt");
                 System.out.println("Saved states: " + updatedStates);
                 System.out.println("done");
+            }
+        });
+
+        selectAllButton.addActionListener((ActionEvent d) -> {
+            if (d.getSource() == selectAllButton) {
+                for (Map.Entry<String, JCheckBox> entry : stateCheckboxes.entrySet()) {
+                    JCheckBox cb = entry.getValue();
+                    cb.setSelected(true);
+                }
+                frame.repaint();
+                frame.revalidate();
+            }
+        });
+
+        disselectAllButton.addActionListener((ActionEvent e) -> {
+            if (e.getSource() == disselectAllButton) {
+                for (Map.Entry<String, JCheckBox> entry : stateCheckboxes.entrySet()) {
+                    JCheckBox cb = entry.getValue();
+                    cb.setSelected(false);
+                }
+            }
+        });
+
+        indexButton.addActionListener((ActionEvent f) -> {
+            if (f.getSource() == indexButton) {
+                panel.remove(indexButton);
+                panel.remove(plateMapButton);
+                panel.add(continueButton);
+                continueButton.setText("Back");
+                frame.repaint();
+                frame.revalidate();
+                changeBackground("PlateIndex_err.jpg");
             }
         });
 
