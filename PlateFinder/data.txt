@@ -43,6 +43,7 @@ colorado : 1
 new york : 1
 north dakota : 1
 wyoming : 1
+washington dc : 1
 south dakota : 1
 vermont : 1
 mississippi : 1

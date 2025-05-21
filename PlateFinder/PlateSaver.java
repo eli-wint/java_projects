@@ -23,6 +23,7 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 public class PlateSaver {
@@ -59,7 +60,7 @@ public class PlateSaver {
             "missouri", "montana", "nebraska", "nevada", "new hampshire", "new jersey", "new mexico",
             "new york", "north carolina", "north dakota", "ohio", "oklahoma", "oregon", "pennsylvania",
             "rhode island", "south carolina", "south dakota", "tennessee", "texas", "utah", "vermont",
-            "virginia", "washington", "west virginia", "wisconsin", "wyoming"
+            "virginia", "washington", "west virginia", "wisconsin", "wyoming", "washington d."
         };
 
         for (String state : statesArray) {
@@ -77,7 +78,7 @@ public class PlateSaver {
             if (sb.length() > 0) {
                 sb.append(" ");
             }
-            sb.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1));
+            sb.append(Character.toUpperCase(part.charAt(0))).append(part.substring(1).replace(".", "C"));
         }
         return sb.toString();
     }
@@ -185,16 +186,18 @@ public class PlateSaver {
                 statePositions.put("virginia", new int[]{744, 222});
                 statePositions.put("north carolina", new int[]{724, 254});
                 statePositions.put("south carolina", new int[]{720, 282});
-                statePositions.put("maryland", new int[]{790, 192});
+                statePositions.put("maryland", new int[]{790, 194});
                 statePositions.put("vermont", new int[]{826, 82});
                 statePositions.put("massachusetts", new int[]{838, 118});
                 statePositions.put("rhode island", new int[]{856, 127});
                 statePositions.put("connecticut", new int[]{835, 136});
                 statePositions.put("new jersey", new int[]{815, 160});
-                statePositions.put("delaware", new int[]{810, 182});
+                statePositions.put("delaware", new int[]{800, 176});
                 statePositions.put("maine", new int[]{860, 50});
                 statePositions.put("alaska", new int[]{100, 380});
                 statePositions.put("hawaii", new int[]{310, 443});
+                statePositions.put("washington d.", new int[]{777, 185});
+                statePositions.put("new hampshire", new int[]{848, 95});
 
                 System.out.println(states);
                 panel.remove(plateMapButton);
@@ -286,9 +289,12 @@ public class PlateSaver {
 
         indexButton.addActionListener((ActionEvent f) -> {
             if (f.getSource() == indexButton) {
+                ImageIcon plates = new ImageIcon("Plate Index 3.jpg");
+                JScrollPane scrollPane = new JScrollPane(new JLabel(plates));
+                panel.add(continueButton);
+                frame.add(scrollPane);
                 panel.remove(indexButton);
                 panel.remove(plateMapButton);
-                panel.add(continueButton);
                 continueButton.setText("Back");
                 frame.repaint();
                 frame.revalidate();
