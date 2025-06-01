@@ -6,13 +6,14 @@ texas : 1
 missouri : 1
 georgia : 1
 alaska : 1
-delaware : 0
+delaware : 1
 massachusetts : 1
 california : 1
 oklahoma : 1
 new hampshire : 1
 north carolina : 1
 alabama : 1
+washington d. : 0
 louisiana : 1
 kansas : 1
 pennsylvania : 1
@@ -43,7 +44,6 @@ colorado : 1
 new york : 1
 north dakota : 1
 wyoming : 1
-washington dc : 1
 south dakota : 1
 vermont : 1
 mississippi : 1
